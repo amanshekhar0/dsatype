@@ -1,4 +1,4 @@
-import { XIcon, MailIcon } from 'lucide-react';
+import { XIcon, MailIcon, Linkedin } from 'lucide-react';
 
 interface AboutModalProps {
     isOpen: boolean;
@@ -24,7 +24,7 @@ export const AboutModal = ({ isOpen, onClose }: AboutModalProps) => {
                     <XIcon size={24} />
                 </button>
 
-                <div className="p-8 space-y-6">
+                <div className="p-6 space-y-5">
 
                     {/* ABOUT SECTION */}
                     <div className="space-y-2">
@@ -42,27 +42,47 @@ export const AboutModal = ({ isOpen, onClose }: AboutModalProps) => {
                         </p>
                     </div>
 
-                    {/* MADE BY */}
-                    <div className="space-y-2">
-                        <h3 className="text-xl font-semibold text-foreground">Made By</h3>
+                    {/* MADE BY SECTION */}
+                    <div className="space-y-2 flex flex-col items-center text-center">
+
+                        {/* Title + LinkedIn Icon */}
+                        <div className="flex items-center gap-2 justify-center">
+                            <h3 className="text-xl font-semibold text-foreground">Made By</h3>
+
+                            <a
+                                href="https://www.linkedin.com/in/aman-shekhar-59889027a/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-primary transition-colors"
+                                aria-label="LinkedIn Profile"
+                            >
+                                <Linkedin size={22} />
+                            </a>
+                        </div>
+
+                        {/* Name */}
+                        <p className="text-foreground font-medium">Aman Shekhar</p>
+
+                        {/* Description */}
                         <p className="text-muted-foreground">
-                            Aman Shekhar — the guy who thought, “What if typing pain and DSA pain were… the same thing?”
+                            The guy who thought, “What if typing pain and DSA pain were… the same thing?”
                         </p>
                     </div>
 
-                    {/* OBJECTIVE */}
+                    {/* OBJECTIVE SECTION */}
                     <div className="space-y-2">
                         <h3 className="text-xl font-semibold text-foreground">Objective</h3>
-                        <p className="text-muted-foreground">
+                        <p className="text-muted-foreground leading-relaxed">
                             Start algorithms faster, revise without pretending to revise, and proudly waste time
                             here instead of Monkeytype. At least now your procrastination looks productive.
                         </p>
                     </div>
 
-                    {/* CONTACT */}
+                    {/* CONTACT SECTION */}
                     <div className="space-y-2">
                         <h3 className="text-xl font-semibold text-foreground">Contact</h3>
-                        <div className="flex items-center gap-2 text-muted-foreground">
+
+                        <div className="flex items-center gap-3 text-muted-foreground">
                             <MailIcon size={18} />
                             <a
                                 href="mailto:amanshekhar000@gmail.com"

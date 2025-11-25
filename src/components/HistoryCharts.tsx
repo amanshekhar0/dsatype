@@ -26,14 +26,14 @@ const CustomTooltip: React.FC<RechartsTooltipProps> = ({ active, payload, label 
   if (!active || !payload || payload.length === 0) return null;
 
   return (
-    <div className="bg-gray-800 p-2 border border-gray-700 rounded-md shadow-lg">
-      <p className="text-gray-300">{`Date: ${label}`}</p>
+    <div className="bg-card p-2 border border-border rounded-md shadow-lg">
+      <p className="text-card-foreground font-medium">{`Date: ${label}`}</p>
       {payload.map((entry, idx) => {
         const key = entry?.dataKey ?? '';
         const value = entry?.value ?? '';
         const isWpm = key === 'wpm';
         return (
-          <p key={idx} className={isWpm ? 'text-blue-400' : 'text-green-400'}>
+          <p key={idx} className={isWpm ? 'text-primary' : 'text-green-600 dark:text-green-400'}>
             {`${isWpm ? 'WPM' : 'Accuracy'}: ${value}${key === 'accuracy' ? '%' : ''}`}
           </p>
         );
@@ -67,7 +67,7 @@ export default function HistoryCharts({ history }: HistoryChartsProps) {
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-xl font-semibold mb-4">Words Per Minute Over Time</h3>
+        <h3 className="text-xl font-semibold mb-4 text-foreground">Words Per Minute Over Time</h3>
         <div className="h-64 sm:h-80">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
@@ -79,16 +79,16 @@ export default function HistoryCharts({ history }: HistoryChartsProps) {
                 bottom: 5
               }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-              <XAxis dataKey="date" stroke="#9CA3AF" tick={{ fill: '#9CA3AF' }} />
-              <YAxis stroke="#9CA3AF" tick={{ fill: '#9CA3AF' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+              <XAxis dataKey="date" stroke="var(--muted-foreground)" tick={{ fill: 'var(--muted-foreground)' }} />
+              <YAxis stroke="var(--muted-foreground)" tick={{ fill: 'var(--muted-foreground)' }} />
               <Tooltip content={<CustomTooltip />} />
               <Line
                 type="monotone"
                 dataKey="wpm"
-                stroke="#3B82F6"
+                stroke="var(--primary)"
                 strokeWidth={2}
-                dot={{ fill: '#3B82F6', r: 4 }}
+                dot={{ fill: 'var(--primary)', r: 4 }}
                 activeDot={{ r: 6 }}
               />
             </LineChart>
@@ -97,7 +97,7 @@ export default function HistoryCharts({ history }: HistoryChartsProps) {
       </div>
 
       <div>
-        <h3 className="text-xl font-semibold mb-4">Accuracy Over Time</h3>
+        <h3 className="text-xl font-semibold mb-4 text-foreground">Accuracy Over Time</h3>
         <div className="h-64 sm:h-80">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
@@ -109,9 +109,9 @@ export default function HistoryCharts({ history }: HistoryChartsProps) {
                 bottom: 5
               }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-              <XAxis dataKey="date" stroke="#9CA3AF" tick={{ fill: '#9CA3AF' }} />
-              <YAxis stroke="#9CA3AF" tick={{ fill: '#9CA3AF' }} domain={[0, 100]} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+              <XAxis dataKey="date" stroke="var(--muted-foreground)" tick={{ fill: 'var(--muted-foreground)' }} />
+              <YAxis stroke="var(--muted-foreground)" tick={{ fill: 'var(--muted-foreground)' }} domain={[0, 100]} />
               <Tooltip content={<CustomTooltip />} />
               <Line
                 type="monotone"
