@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTyping } from '../context/TypingContext';
 export const TargetCode = ({
   code
@@ -10,8 +9,8 @@ export const TargetCode = ({
     currentIndex
   } = useTyping();
   return <div className="bg-gray-800 rounded-lg border border-gray-700 p-4 h-full overflow-auto">
-      <pre className="font-mono text-sm whitespace-pre-wrap">
-        {code.split('').map((char, index) => {
+    <pre className="font-mono text-sm whitespace-pre-wrap">
+      {code.split('').map((char, index) => {
         let className = 'transition-colors duration-100 ';
         // Character styling based on typing status
         if (index < typedText.length) {
@@ -22,9 +21,9 @@ export const TargetCode = ({
           className += ' border-b-2 border-blue-500';
         }
         return <span key={index} className={className}>
-              {char}
-            </span>;
+          {char}
+        </span>;
       })}
-      </pre>
-    </div>;
+    </pre>
+  </div>;
 };

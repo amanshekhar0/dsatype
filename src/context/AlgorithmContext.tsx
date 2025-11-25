@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, createContext, useContext, memo } from 'react';
+import { useCallback, useEffect, useState, createContext, useContext, ReactNode } from 'react';
 import { algorithmData } from '../data/algorithms';
 import { AlgorithmSnippet } from '../types';
 interface AlgorithmContextType {
@@ -59,8 +59,8 @@ export const AlgorithmProvider = ({
     fetchRandomAlgorithm,
     resetFilters
   }}>
-      {children}
-    </AlgorithmContext.Provider>;
+    {children}
+  </AlgorithmContext.Provider>;
 };
 export const useAlgorithm = () => {
   const context = useContext(AlgorithmContext);
