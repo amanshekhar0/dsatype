@@ -6,6 +6,7 @@ export interface AlgorithmSnippet {
   language: string;
   description: string;
   code: string;
+  codeCpp?: string;
 }
 export interface TypingAttempt {
   timestamp: number;

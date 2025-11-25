@@ -16,12 +16,14 @@ export const TypingSection: React.FC = () => {
     selectedDifficulty,
     setSelectedCategory,
     setSelectedDifficulty,
-    fetchRandomAlgorithm
+    fetchRandomAlgorithm,
+    language
   } = useAlgorithm();
 
   const {
     typingSectionRef,
-    isCompleted
+    isCompleted,
+    resetTyping
   } = useTyping();
 
   // Safety wrappers so component doesn't crash if context isn't providing setters/arrays
@@ -57,7 +59,7 @@ export const TypingSection: React.FC = () => {
               id="category-select"
               value={selectedCategory ?? 'All'}
               onChange={handleCategoryChange}
-              className="bg-gray-800 text-gray-200 py-2 px-3 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-card text-foreground py-2 px-3 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-primary"
             >
               <option value="All">All Categories</option>
               {safeCategories.map((category) => (
@@ -72,7 +74,7 @@ export const TypingSection: React.FC = () => {
               id="difficulty-select"
               value={selectedDifficulty ?? (safeDifficulties[0] ?? '')}
               onChange={handleDifficultyChange}
-              className="bg-gray-800 text-gray-200 py-2 px-3 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-card text-foreground py-2 px-3 rounded-md border border-border focus:outline-none focus:ring-2 focus:ring-primary"
             >
               {safeDifficulties.length === 0 ? (
                 <option value="">No difficulties</option>
@@ -86,58 +88,67 @@ export const TypingSection: React.FC = () => {
             </select>
           </div>
 
-          <button
-            type="button"
-            onClick={handleRandomClick}
-            className="bg-gray-800 hover:bg-gray-700 text-gray-200 font-medium py-2 px-4 rounded-md border border-gray-700 transition-colors duration-200"
-          >
-            Random Algorithm
-          </button>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={resetTyping}
+              className="bg-card hover:bg-muted text-foreground font-medium py-2 px-4 rounded-md border border-border transition-colors duration-200"
+            >
+              Restart
+            </button>
+            <button
+              type="button"
+              onClick={handleRandomClick}
+              className="bg-card hover:bg-muted text-foreground font-medium py-2 px-4 rounded-md border border-border transition-colors duration-200"
+            >
+              Random Algorithm
+            </button>
+          </div>
         </div>
 
         {/* Algorithm Info */}
         {currentAlgorithm ? (
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-2">
-              <h2 className="text-2xl font-bold">{currentAlgorithm.title}</h2>
+              <h2 className="text-2xl font-bold text-foreground">{currentAlgorithm.title}</h2>
               <span
                 className={`text-sm px-2 py-1 rounded-full ${currentAlgorithm.difficulty === 'Easy'
-                  ? 'bg-green-900 text-green-300'
+                  ? 'bg-green-500/20 text-green-600 dark:text-green-400'
                   : currentAlgorithm.difficulty === 'Medium'
-                    ? 'bg-yellow-900 text-yellow-300'
-                    : 'bg-red-900 text-red-300'
+                    ? 'bg-yellow-500/20 text-yellow-600 dark:text-yellow-400'
+                    : 'bg-red-500/20 text-red-600 dark:text-red-400'
                   }`}
               >
                 {currentAlgorithm.difficulty}
               </span>
-              <span className="text-sm bg-gray-800 px-2 py-1 rounded-full text-gray-300">
+              <span className="text-sm bg-card px-2 py-1 rounded-full text-muted-foreground border border-border">
                 {currentAlgorithm.category}
               </span>
             </div>
-            <p className="text-gray-400 flex items-center gap-2">
+            <p className="text-muted-foreground flex items-center gap-2">
               <BookOpenIcon size={16} />
               {currentAlgorithm.description}
             </p>
           </div>
         ) : (
-          <div className="mb-6 text-gray-400">No algorithm selected.</div>
+          <div className="mb-6 text-muted-foreground">No algorithm selected.</div>
         )}
 
         {/* Typing Area */}
         {currentAlgorithm ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="relative">
-              <div className="absolute top-2 right-2 flex items-center gap-1 text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">
-                <CodeIcon size={14} /> <span className="ml-1">Target Code</span>
+              <div className="absolute top-2 right-2 flex items-center gap-1 text-xs text-muted-foreground bg-card px-2 py-1 rounded border border-border">
+                <CodeIcon size={14} /> <span className="ml-1">Target Code ({language})</span>
               </div>
-              <TargetCode code={currentAlgorithm.code} />
+              <TargetCode code={(language === 'C++' && currentAlgorithm.codeCpp) ? currentAlgorithm.codeCpp : currentAlgorithm.code} />
             </div>
 
             <div className="relative">
-              <div className="absolute top-2 right-2 flex items-center gap-1 text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">
+              <div className="absolute top-2 right-2 flex items-center gap-1 text-xs text-muted-foreground bg-card px-2 py-1 rounded border border-border">
                 <MaximizeIcon size={14} /> <span className="ml-1">Your Input</span>
               </div>
-              <TypingArea targetCode={currentAlgorithm.code} />
+              <TypingArea targetCode={(language === 'C++' && currentAlgorithm.codeCpp) ? currentAlgorithm.codeCpp : currentAlgorithm.code} />
             </div>
           </div>
         ) : null}

@@ -8,7 +8,7 @@ export const TargetCode = ({
     typedText,
     currentIndex
   } = useTyping();
-  return <div className="bg-gray-800 rounded-lg border border-gray-700 p-4 h-full overflow-auto">
+  return <div className="bg-card rounded-lg border border-border p-4 h-full overflow-auto">
     <pre className="font-mono text-sm whitespace-pre-wrap">
       {code.split('').map((char, index) => {
         let className = 'transition-colors duration-100 ';
@@ -18,7 +18,7 @@ export const TargetCode = ({
         }
         // Current character highlight
         if (index === currentIndex) {
-          className += ' border-b-2 border-blue-500';
+          className += ' border-b-2 border-primary';
         }
         return <span key={index} className={className}>
           {char}

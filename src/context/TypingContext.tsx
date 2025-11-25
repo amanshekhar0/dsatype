@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState, useRef, createContext, useContext, ReactNode } from 'react';
 import { useAlgorithm } from './AlgorithmContext';
 import { useTypingHistory } from '../hooks/useTypingHistory';
+import { TypingAttempt } from '../types';
+
 interface TypingContextType {
   typedText: string;
   setTypedText: (text: string) => void;
@@ -23,8 +25,12 @@ interface TypingContextType {
   scrollToTypingSection: () => void;
   wpmHistory: { time: number; wpm: number }[];
   typingSectionRef: React.RefObject<HTMLElement>;
+  history: TypingAttempt[];
+  clearHistory: () => void;
 }
+
 const TypingContext = createContext<TypingContextType | undefined>(undefined);
+
 export const TypingProvider = ({
   children
 }: {
@@ -43,97 +49,74 @@ export const TypingProvider = ({
   const [cpm, setCpm] = useState<number>(0);
   const [accuracy, setAccuracy] = useState<number>(100);
   const [wpmHistory, setWpmHistory] = useState<{ time: number; wpm: number }[]>([]);
+
   const typingSectionRef = useRef<HTMLElement>(null);
+
   const {
     currentAlgorithm
   } = useAlgorithm();
-  const {
-    addAttempt
-  } = useTypingHistory();
-  // Calculate metrics - memoized
-  const calculateMetrics = useCallback(() => {
-    if (!startTime) {
-      setWpm(0);
-      setCpm(0);
-      return;
-    }
-    const currentTime = endTime || new Date();
-    const elapsed = currentTime.getTime() - startTime.getTime();
-    const minutes = elapsed / 60000;
-    const charCount = typedText.length;
-    // Calculate WPM (5 characters = 1 word)
-    const words = charCount / 5;
-    const calculatedWpm = minutes > 0 ? words / minutes : 0;
-    // Calculate CPM
-    const calculatedCpm = minutes > 0 ? charCount / minutes : 0;
-    setWpm(calculatedWpm);
-    setCpm(calculatedCpm);
-  }, [startTime, endTime, typedText.length]);
-  // Calculate accuracy and count mistakes - memoized
-  const calculateAccuracy = useCallback(() => {
-    if (!currentAlgorithm || typedText.length === 0) {
-      setAccuracy(100);
-      setCorrectCharsCount(0);
-      setMistakesCount(0);
-      return;
-    }
-    let correct = 0;
-    let mistakes = 0;
-    const targetText = currentAlgorithm.code;
-    const minLength = Math.min(typedText.length, targetText.length);
-    for (let i = 0; i < minLength; i++) {
-      if (typedText[i] === targetText[i]) {
-        correct++;
-      } else {
-        mistakes++;
+
+  const { history, addAttempt, clearHistory } = useTypingHistory();
+
+  const checkCompletion = useCallback(() => {
+    // Prevent multiple triggers if already completed
+    if (isCompleted) return;
+
+    if (currentAlgorithm && currentIndex >= currentAlgorithm.code.length) {
+      setIsCompleted(true);
+      const end = new Date();
+      setEndTime(end);
+      setIsRunning(false);
+
+      // Calculate final stats
+      if (startTime) {
+        const elapsed = end.getTime() - startTime.getTime();
+        const timeInSeconds = Math.floor(elapsed / 1000);
+        const minutes = elapsed / 60000;
+        const charCount = typedText.length;
+        const words = charCount / 5;
+        const finalWpm = minutes > 0 ? words / minutes : 0;
+
+        // Calculate mistakes and accuracy
+        let mistakes = 0;
+        const minLength = Math.min(typedText.length, currentAlgorithm.code.length);
+        for (let i = 0; i < minLength; i++) {
+          if (typedText[i] !== currentAlgorithm.code[i]) {
+            mistakes++;
+          }
+        }
+        // Add extra characters as mistakes if typedText is longer
+        if (typedText.length > currentAlgorithm.code.length) {
+          mistakes += typedText.length - currentAlgorithm.code.length;
+        }
+
+        const finalAccuracy = charCount > 0 ? Math.max(0, ((charCount - mistakes) / charCount) * 100) : 100;
+        const finalCpm = minutes > 0 ? charCount / minutes : 0;
+
+        setMistakesCount(mistakes);
+        setAccuracy(finalAccuracy);
+
+        addAttempt({
+          timestamp: end.getTime(),
+          algorithmTitle: currentAlgorithm.title,
+          category: currentAlgorithm.category,
+          difficulty: currentAlgorithm.difficulty,
+          wpm: Math.round(finalWpm),
+          cpm: Math.round(finalCpm),
+          accuracy: finalAccuracy,
+          mistakeCount: mistakes,
+          timeTakenInSeconds: timeInSeconds
+        });
       }
     }
-    setCorrectCharsCount(correct);
-    setMistakesCount(mistakes);
-    setAccuracy(correct / typedText.length * 100 || 100);
-  }, [currentAlgorithm, typedText]);
-  // Update metrics when relevant state changes
-  useEffect(() => {
-    calculateMetrics();
-    calculateAccuracy();
-  }, [calculateMetrics, calculateAccuracy]);
+  }, [currentIndex, currentAlgorithm, startTime, typedText, addAttempt, isCompleted]);
 
-  // Check if typing is complete - memoized
-  const checkCompletion = useCallback(() => {
-    if (!currentAlgorithm) return;
-    if (typedText.length === currentAlgorithm.code.length) {
-      setIsRunning(false);
-      const completionTime = new Date();
-      setEndTime(completionTime);
-      setIsCompleted(true);
-      // Calculate final metrics
-      const finalElapsed = completionTime.getTime() - (startTime?.getTime() || 0);
-      const timeTaken = finalElapsed / 1000;
-      // Save attempt to history
-      addAttempt({
-        timestamp: completionTime.getTime(),
-        algorithmTitle: currentAlgorithm.title,
-        category: currentAlgorithm.category,
-        difficulty: currentAlgorithm.difficulty,
-        wpm,
-        cpm,
-        accuracy,
-        mistakeCount: mistakesCount,
-        timeTakenInSeconds: Math.floor(timeTaken)
-      });
-    }
-  }, [currentAlgorithm, typedText.length, startTime, wpm, cpm, accuracy, mistakesCount, addAttempt]);
-
-  // Check completion automatically when typedText changes
+  // Trigger checkCompletion when currentIndex changes
   useEffect(() => {
-    if (currentAlgorithm && typedText.length === currentAlgorithm.code.length && !isCompleted) {
-      checkCompletion();
-    }
-  }, [typedText, currentAlgorithm, isCompleted, checkCompletion]);
-  // Reset typing state - memoized
+    checkCompletion();
+  }, [checkCompletion]);
+
   const resetTyping = useCallback(() => {
-    setTypedText('');
-    setIsRunning(false);
     setStartTime(null);
     setEndTime(null);
     setCurrentIndex(0);
@@ -145,18 +128,23 @@ export const TypingProvider = ({
     setCpm(0);
     setAccuracy(100);
     setWpmHistory([]);
+    setTypedText('');
+    setIsRunning(false);
   }, []);
-  // Scroll to typing section - memoized
+
   const scrollToTypingSection = useCallback(() => {
     typingSectionRef.current?.scrollIntoView({
       behavior: 'smooth'
     });
   }, []);
-  // Update timer every 100ms while running
+
+  // Update timer and WPM history
   useEffect(() => {
     let interval: NodeJS.Timeout;
     let historyInterval: NodeJS.Timeout;
+
     if (isRunning && startTime) {
+      // Update elapsed time for UI every 100ms
       interval = setInterval(() => {
         const currentTime = new Date();
         const elapsed = currentTime.getTime() - startTime.getTime();
@@ -176,17 +164,21 @@ export const TypingProvider = ({
         const currentWpm = minutes > 0 ? words / minutes : 0;
 
         setWpmHistory(prev => [...prev, { time: timeInSeconds, wpm: Math.round(currentWpm) }]);
+        setWpm(Math.round(currentWpm));
       }, 1000);
     }
+
     return () => {
       if (interval) clearInterval(interval);
       if (historyInterval) clearInterval(historyInterval);
     };
   }, [isRunning, startTime, typedText.length]);
+
   // Reset typing when algorithm changes
   useEffect(() => {
     resetTyping();
   }, [currentAlgorithm, resetTyping]);
+
   return <TypingContext.Provider value={{
     typedText,
     setTypedText,
@@ -208,12 +200,14 @@ export const TypingProvider = ({
     resetTyping,
     scrollToTypingSection,
     typingSectionRef,
-    wpmHistory
+    wpmHistory,
+    history,
+    clearHistory
   }}>
     {children}
   </TypingContext.Provider>;
-
 };
+
 export const useTyping = () => {
   const context = useContext(TypingContext);
   if (context === undefined) {

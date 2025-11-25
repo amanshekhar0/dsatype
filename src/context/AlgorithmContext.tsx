@@ -11,6 +11,8 @@ interface AlgorithmContextType {
   setSelectedDifficulty: (difficulty: string) => void;
   fetchRandomAlgorithm: () => void;
   resetFilters: () => void;
+  language: 'Java' | 'C++';
+  setLanguage: (lang: 'Java' | 'C++') => void;
 }
 const AlgorithmContext = createContext<AlgorithmContextType | undefined>(undefined);
 export const AlgorithmProvider = ({
@@ -21,6 +23,7 @@ export const AlgorithmProvider = ({
   const [currentAlgorithm, setCurrentAlgorithm] = useState<AlgorithmSnippet | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('Easy');
+  const [language, setLanguage] = useState<'Java' | 'C++'>('Java');
   // Extract unique categories from data
   const categories = [...new Set(algorithmData.map(algo => algo.category))];
   const difficulties = ['Easy', 'Medium', 'Hard'];
@@ -57,7 +60,9 @@ export const AlgorithmProvider = ({
     setSelectedCategory,
     setSelectedDifficulty,
     fetchRandomAlgorithm,
-    resetFilters
+    resetFilters,
+    language,
+    setLanguage
   }}>
     {children}
   </AlgorithmContext.Provider>;
