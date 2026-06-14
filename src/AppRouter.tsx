@@ -15,6 +15,8 @@ import { LoginPage } from './pages/LoginPage';
 import { SignupPage } from './pages/SignupPage';
 import { FundamentalsPage } from './pages/FundamentalsPage';
 
+import { TopicPage } from './pages/TopicPage';
+
 export function AppRouter() {
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
 
@@ -36,6 +38,7 @@ export function AppRouter() {
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/history" element={<HistoryPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/:topicId" element={<TopicPage />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </TypingProvider>

@@ -164,17 +164,27 @@ export const TypingProvider = ({ children }: { children: ReactNode }) => {
 
   // Countdown timer
   useEffect(() => {
-    if (!isRunning || isCompletedRef.current || settings.countdownDuration === 0) return;
-    if (countdownRemaining === null) {
-      setCountdownRemaining(settings.countdownDuration);
+    if (settings.countdownDuration === 0) {
+      if (countdownRemaining !== null) setCountdownRemaining(null);
       return;
     }
-    if (countdownRemaining <= 0) {
+
+    if (!isRunning) {
+      if (!isCompletedRef.current && countdownRemaining !== settings.countdownDuration) {
+        setCountdownRemaining(settings.countdownDuration);
+      }
+      return;
+    }
+
+    if (isCompletedRef.current) return;
+
+    if (countdownRemaining !== null && countdownRemaining <= 0) {
       const end = new Date();
       const elapsed = end.getTime() - (startTime?.getTime() ?? end.getTime());
       finishSession(end, typedText, displayCode, elapsed);
       return;
     }
+
     const timer = setTimeout(() => setCountdownRemaining(r => (r !== null ? r - 1 : null)), 1000);
     return () => clearTimeout(timer);
   }, [isRunning, countdownRemaining, settings.countdownDuration, startTime, typedText, displayCode, finishSession]);

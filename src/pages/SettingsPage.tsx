@@ -307,37 +307,7 @@ export const SettingsPage = () => {
           </Row>
         </Section>
 
-        {/* ═══ AI Generation ═══ */}
-        <Section title="AI Generation (Grok)">
-          <div className="text-xs text-muted-foreground mb-3">
-            Enter your xAI Grok API key to generate custom questions on demand. Get your key at{' '}
-            <a href="https://console.x.ai" target="_blank" rel="noreferrer" className="text-primary hover:underline">
-              console.x.ai
-            </a>
-          </div>
-          <div className="relative">
-            <input
-              type={showKey ? 'text' : 'password'}
-              value={settings.grokApiKey}
-              onChange={e => updateSettings({ grokApiKey: e.target.value })}
-              placeholder="xai-…"
-              className="w-full bg-background border border-border rounded-lg px-3 py-2.5 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary pr-10 font-mono"
-            />
-            <button
-              type="button"
-              onClick={() => setShowKey(!showKey)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-            >
-              {showKey ? <EyeOffIcon size={16} /> : <EyeIcon size={16} />}
-            </button>
-          </div>
-          {settings.grokApiKey && (
-            <p className="text-xs text-green-400 mt-1.5 flex items-center gap-1">
-              <CheckIcon size={12} />
-              API key saved locally — never sent anywhere except xAI.
-            </p>
-          )}
-        </Section>
+
 
         <div className="flex gap-3">
           <button

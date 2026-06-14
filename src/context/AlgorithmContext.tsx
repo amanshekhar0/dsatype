@@ -161,7 +161,7 @@ export const AlgorithmProvider = ({ children }: { children: ReactNode }) => {
   const generateWithAI = useCallback(async () => {
     const apiKey = settings.grokApiKey;
     if (!apiKey) {
-      setGenerationError('Add your Grok API key in Settings to use AI generation.');
+      setGenerationError('AI generation is not configured on this server.');
       return;
     }
     setIsGenerating(true);

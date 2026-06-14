@@ -1,5 +1,4 @@
-# CodeType robots.txt
 User-agent: *
 Allow: /
 
-Sitemap: https://codetype.app/sitemap.xml
+Sitemap: https://dsatyping.vercel.app/sitemap.xml

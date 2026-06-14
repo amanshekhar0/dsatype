@@ -297,6 +297,7 @@ export const PracticePage = () => {
                   {isGenerating ? 'Generating…' : 'Generate with AI'}
                 </button>
 
+
                 {/* PASTE CODE BUTTON */}
                 <button
                   onClick={() => setShowPasteModal(true)}

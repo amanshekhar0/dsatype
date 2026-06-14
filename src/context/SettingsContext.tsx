@@ -7,7 +7,7 @@ const DEFAULT_SETTINGS: AppSettings = {
   fontSize: 'md',
   theme: 'dark',
   visualTheme: 'typewriter',
-  soundEffects: false,
+  soundEffects: true,
   typingFeedback: true,
   showLineNumbers: true,
   caretStyle: 'line',
@@ -46,9 +46,9 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
         const parsed: Partial<AppSettings> = JSON.parse(saved);
         // If no key was manually saved, fall back to the env variable
         if (!parsed.grokApiKey) parsed.grokApiKey = ENV_GROK_API_KEY;
-        // Migrate: if old settings had no visualTheme, derive from theme
+        // Migrate: if old settings had no visualTheme, default to typewriter
         if (!parsed.visualTheme) {
-          parsed.visualTheme = parsed.theme === 'light' ? 'daylight' : 'midnight';
+          parsed.visualTheme = 'typewriter';
         }
         return { ...DEFAULT_SETTINGS, ...parsed };
       }
