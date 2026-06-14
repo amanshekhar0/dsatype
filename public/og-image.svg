@@ -1,0 +1,56 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D1220" />
+      <stop offset="1" stop-color="#070A12" />
+    </linearGradient>
+    <radialGradient id="glow1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(220 150) rotate(45) scale(420)">
+      <stop stop-color="#FBBF24" stop-opacity="0.25" />
+      <stop offset="1" stop-color="#FBBF24" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glow2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1000 500) rotate(45) scale(420)">
+      <stop stop-color="#6366F1" stop-opacity="0.25" />
+      <stop offset="1" stop-color="#6366F1" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="amber" x1="120" y1="240" x2="700" y2="240" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FBBF24" />
+      <stop offset="1" stop-color="#F59E0B" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect width="1200" height="630" fill="url(#glow1)" />
+  <rect width="1200" height="630" fill="url(#glow2)" />
+
+  <!-- logo mark -->
+  <g transform="translate(120 110)">
+    <rect width="80" height="80" rx="18" fill="#111827" stroke="#FBBF24" stroke-opacity="0.3" stroke-width="2" />
+    <path d="M28 30L18 40L28 50" stroke="#FBBF24" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M52 30L62 40L52 50" stroke="#FBBF24" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="38" y="52" width="16" height="5" rx="2.5" fill="#FBBF24" />
+  </g>
+  <text x="220" y="168" font-family="Inter, sans-serif" font-size="38" font-weight="700" fill="#E8ECF4">CodeType</text>
+
+  <!-- headline -->
+  <text x="120" y="320" font-family="Inter, sans-serif" font-size="84" font-weight="800" fill="#E8ECF4">Type Code.</text>
+  <text x="120" y="420" font-family="Inter, sans-serif" font-size="84" font-weight="800" fill="url(#amber)">Think Faster.</text>
+
+  <text x="120" y="490" font-family="Inter, sans-serif" font-size="30" font-weight="400" fill="#8A95AD">Typing practice built for developers — Java · C++ · Python · SQL</text>
+
+  <!-- code chip -->
+  <g transform="translate(120 530)">
+    <rect width="520" height="60" rx="12" fill="#0E1422" stroke="#1C2638" stroke-width="1.5" />
+    <text x="24" y="38" font-family="'JetBrains Mono', monospace" font-size="24" fill="#94A3B8">def <tspan fill="#FBBF24">binary_search</tspan>(arr, target):</text>
+  </g>
+
+  <!-- stats badges -->
+  <g transform="translate(820 250)" font-family="Inter, sans-serif">
+    <rect width="260" height="70" rx="14" fill="#0E1422" stroke="#1C2638" stroke-width="1.5" />
+    <text x="24" y="32" font-size="16" fill="#8A95AD">REAL-TIME</text>
+    <text x="24" y="56" font-size="24" font-weight="700" fill="#FBBF24">WPM &amp; Accuracy</text>
+  </g>
+  <g transform="translate(820 340)" font-family="Inter, sans-serif">
+    <rect width="260" height="70" rx="14" fill="#0E1422" stroke="#1C2638" stroke-width="1.5" />
+    <text x="24" y="32" font-size="16" fill="#8A95AD">POWERED BY</text>
+    <text x="24" y="56" font-size="24" font-weight="700" fill="#818CF8">AI Generation</text>
+  </g>
+</svg>

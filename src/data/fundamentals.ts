@@ -1,0 +1,148 @@
+import { AlgorithmSnippet } from '../types';
+
+export const fundamentalsData: AlgorithmSnippet[] = [
+  // ── OPERATING SYSTEMS ────────────────────────────────────────────────────────
+  {
+    id: 'fund_os_1',
+    title: 'Process vs Thread',
+    category: 'Operating Systems',
+    difficulty: 'Easy',
+    language: 'Theory',
+    description: 'Explain the core differences between a Process and a Thread in modern Operating Systems.',
+    code: 'A process is an independent executing program with its own private memory space, address space, and system resources. If one process crashes, it does not affect others. A thread is a lightweight execution unit inside a process that shares the parent process\'s memory space, stack, and file descriptors. Threads can communicate directly and switch contexts much faster, but a crash in one thread can crash the entire parent process due to shared memory.',
+  },
+  {
+    id: 'fund_os_2',
+    title: 'Deadlock Necessary Conditions',
+    category: 'Operating Systems',
+    difficulty: 'Medium',
+    language: 'Theory',
+    description: 'What are the four Coffman conditions required for a Deadlock state to occur?',
+    code: 'For a deadlock to occur, four necessary conditions must hold simultaneously: 1. Mutual Exclusion: At least one resource must be held in a non-shareable mode. 2. Hold and Wait: A process must be holding at least one resource and waiting to acquire additional resources. 3. No Preemption: Resources cannot be forcibly taken from a process holding them. 4. Circular Wait: A closed chain of processes exists, where each process holds resources needed by the next process in the chain.',
+  },
+  {
+    id: 'fund_os_3',
+    title: 'Virtual Memory and Paging',
+    category: 'Operating Systems',
+    difficulty: 'Hard',
+    language: 'Theory',
+    description: 'Explain how virtual memory operates using the concept of paging and page tables.',
+    code: 'Virtual memory is a memory management capability of an operating system that uses hardware and software to allow a computer to compensate for physical memory shortages, temporarily transferring data from random access memory (RAM) to disk storage. Paging divides virtual memory into fixed-size blocks called pages, and physical memory into page frames. The page table maps a process\'s virtual addresses to physical RAM locations, generating page faults to load pages from disk when needed.',
+  },
+
+  // ── COMPUTER NETWORKS ───────────────────────────────────────────────────────
+  {
+    id: 'fund_net_1',
+    title: 'TCP vs UDP',
+    category: 'Computer Networks',
+    difficulty: 'Easy',
+    language: 'Theory',
+    description: 'Compare Transmission Control Protocol (TCP) and User Datagram Protocol (UDP).',
+    code: 'TCP is a connection-oriented, reliable transport protocol that guarantees ordered delivery of packets through error checking, handshakes, flow control, and retransmissions, making it ideal for web browsing and file transfers. UDP is a connectionless, lightweight transport protocol that sends packets directly without handshakes or delivery confirmation, offering high speed with potential packet loss, suitable for video streaming, gaming, and VoIP.',
+  },
+  {
+    id: 'fund_net_2',
+    title: 'OSI Model Layers',
+    category: 'Computer Networks',
+    difficulty: 'Medium',
+    language: 'Theory',
+    description: 'List the seven layers of the OSI model in order and explain the purpose of the Transport layer.',
+    code: 'The seven layers of the OSI model from bottom to top are: Physical, Data Link, Network, Transport, Session, Presentation, and Application. The Transport Layer (Layer 4) is responsible for end-to-end communication, flow control, error detection, and segmentation. It ensures that packets are delivered reliably, in order, and without duplicates, primarily using protocols like TCP and UDP to manage data stream assembly.',
+  },
+  {
+    id: 'fund_net_3',
+    title: 'DNS Resolution Loop',
+    category: 'Computer Networks',
+    difficulty: 'Hard',
+    language: 'Theory',
+    description: 'Detail the steps that occur when resolving a domain name (DNS resolution) from a browser request.',
+    code: 'When a user requests a domain name, the browser first checks its local cache, then queries the local DNS Recurser. If unresolved, the Recurser queries the DNS Root Name Server, which directs it to the Top-Level Domain (TLD) server (like .com). The TLD server directs the Recurser to the Authoritative Name Server of the domain, which returns the mapping IP address. The Recurser sends the IP back to the browser and caches it for future requests.',
+  },
+
+  // ── DBMS ───────────────────────────────────────────────────────────────────
+  {
+    id: 'fund_db_1',
+    title: 'ACID Properties',
+    category: 'Database Systems',
+    difficulty: 'Easy',
+    language: 'Theory',
+    description: 'Define the four ACID properties that guarantee reliable database transaction processing.',
+    code: 'ACID stands for: Atomicity: Ensures that all operations in a transaction are completed successfully, or the entire transaction is rolled back. Consistency: Guarantees that a transaction transforms the database from one valid state to another. Isolation: Ensures that concurrent execution of transactions leaves the database in the same state as if they ran sequentially. Durability: Guarantees that committed transaction results survive system crashes.',
+  },
+  {
+    id: 'fund_db_2',
+    title: 'SQL vs NoSQL',
+    category: 'Database Systems',
+    difficulty: 'Medium',
+    language: 'Theory',
+    description: 'Differentiate between relational databases (SQL) and non-relational databases (NoSQL).',
+    code: 'SQL databases are relational, table-based systems that enforce strict schemas, utilize structured query language, and prioritize strong consistency and ACID compliance, scaling vertically. NoSQL databases are non-relational systems (document, key-value, graph, column-family) that support dynamic schemas, scale horizontally across multiple servers, and prioritize high availability and partition tolerance (BASE properties) over immediate consistency.',
+  },
+  {
+    id: 'fund_db_3',
+    title: 'Database Indexing B-Trees',
+    category: 'Database Systems',
+    difficulty: 'Hard',
+    language: 'Theory',
+    description: 'Explain how database indexing speeds up queries and the structure of B-Trees.',
+    code: 'Database indexing is a data structure technique that speeds up data retrieval operations on a table at the cost of slower writes and additional storage space. Indexes are commonly stored as B-Trees, self-balancing search trees where each node contains sorted keys and pointers to child nodes. This keeps data sorted and allows search, sequential access, insertions, and deletions in logarithmic time, minimizing the number of disk page access reads required.',
+  },
+
+  // ── OBJECT ORIENTED PROGRAMMING ─────────────────────────────────────────────
+  {
+    id: 'fund_oop_1',
+    title: 'Encapsulation vs Abstraction',
+    category: 'OOP Concepts',
+    difficulty: 'Easy',
+    language: 'Theory',
+    description: 'Explain the difference between encapsulation and abstraction in object-oriented programming.',
+    code: 'Encapsulation is the practice of wrapping data (variables) and code (methods) together into a single unit (class) and restricting direct access using access modifiers, hiding the internal state. Abstraction is the design process of hiding complex implementation details and exposing only the essential features of an object through interfaces or abstract classes, focusing on what an object does rather than how it does it.',
+  },
+  {
+    id: 'fund_oop_2',
+    title: 'Polymorphism (Runtime vs Compile)',
+    category: 'OOP Concepts',
+    difficulty: 'Medium',
+    language: 'Theory',
+    description: 'Compare Compile-time Polymorphism with Runtime Polymorphism.',
+    code: 'Compile-time polymorphism is resolved at compilation and is achieved through method overloading or operator overloading, where multiple methods share a name but have different signatures. Runtime polymorphism is resolved during execution and is achieved through method overriding, where a subclass overrides a method of its superclass, allowing dynamic method dispatch where the virtual machine executes the override method based on the actual object type.',
+  },
+  {
+    id: 'fund_oop_3',
+    title: 'Inheritance vs Composition',
+    category: 'OOP Concepts',
+    difficulty: 'Hard',
+    language: 'Theory',
+    description: 'Contrast inheritance with composition and explain why code design often favors composition.',
+    code: 'Inheritance represents an "is-a" relationship where a class extends another to inherit fields and behaviors, creating tight coupling and exposing parent internals. Composition represents a "has-a" relationship where a class contains references to instances of other classes to delegate tasks, providing loose coupling and enabling behavioral changes at runtime. Composition is favored because it avoids fragile base class issues and keeps interfaces focused.',
+  },
+
+  // ── DATA STRUCTURES & ALGORITHMS ───────────────────────────────────────────
+  {
+    id: 'fund_dsa_1',
+    title: 'Binary Search Time Complexity',
+    category: 'Algorithms & Structures',
+    difficulty: 'Easy',
+    language: 'Theory',
+    description: 'Analyze the time complexity of Binary Search and why sorting is required.',
+    code: 'Binary search finds a target value within a sorted array by repeatedly dividing the search space in half. Its time complexity is O(log n) because the size of the search space is cut in half at each step, making it extremely fast for large datasets. Sorting is strictly required because the search logic assumes that if the middle element is greater than the target, the target must reside in the left half, and vice versa, which is invalid in unsorted arrays.',
+  },
+  {
+    id: 'fund_dsa_2',
+    title: 'Array vs LinkedList',
+    category: 'Algorithms & Structures',
+    difficulty: 'Medium',
+    language: 'Theory',
+    description: 'Compare memory allocation and search time complexities between Arrays and LinkedLists.',
+    code: 'Arrays store elements in contiguous memory blocks, allowing O(1) time random access via index lookup, but inserting or deleting elements is slow at O(n) because other elements must be shifted. LinkedLists store elements in scattered memory nodes connected by pointers, requiring O(n) linear search time to access index values, but inserting or deleting elements at a known pointer location is highly efficient at O(1) time since only pointers are updated.',
+  },
+  {
+    id: 'fund_dsa_3',
+    title: 'Hash Collisions Resolution',
+    category: 'Algorithms & Structures',
+    difficulty: 'Hard',
+    language: 'Theory',
+    description: 'Explain what hash table collisions are and compare Chaining with Open Addressing.',
+    code: 'A hash collision occurs when two different keys generate the same index hash value. In Separate Chaining, the collision index references a linked list or tree of entries, appending conflicts dynamically in the same bucket. In Open Addressing, all entry elements occupy buckets directly, resolving conflicts by searching for the next empty slot using probing sequences (linear, quadratic, or double hashing), which avoids pointer storage overhead but suffers from clustering issues.',
+  },
+];

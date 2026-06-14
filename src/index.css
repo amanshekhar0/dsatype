@@ -1,83 +1,880 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@600;700;800&family=Special+Elite&family=Courier+Prime:wght@400;700&display=swap');
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
 @layer base {
-  :root {
-    /* Premium Light Mode (Default) */
-    --background: #f3f4f6; /* Light gray/off-white */
-    --foreground: #111827; /* Dark gray/black */
-    
-    --primary: #eab308; /* Yellow/Gold */
-    --primary-foreground: #ffffff;
-    
-    --muted: #e5e7eb;
-    --muted-foreground: #6b7280;
-    
-    --accent: #d1d5db;
-    --accent-foreground: #111827;
-    
-    --card: #ffffff;
-    --card-foreground: #111827;
-    
-    --border: #d1d5db;
-    
-    --font-mono: 'JetBrains Mono', monospace;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* ══════════════════════════════════════════════════════════════════════════
+     THEME: TYPEWRITER (default)
+     Aged paper, ink, sepia warmth
+     ══════════════════════════════════════════════════════════════════════════ */
+  :root,
+  [data-theme="typewriter"] {
+    --background: #f4edd8;
+    --background-elevated: #ede4c9;
+    --foreground: #2c2416;
+
+    --primary: #8b4513;
+    --primary-foreground: #f4edd8;
+    --primary-glow: rgba(139, 69, 19, 0.25);
+
+    --secondary: #5c4033;
+    --secondary-glow: rgba(92, 64, 51, 0.2);
+
+    --muted: #e6dcc3;
+    --muted-foreground: #7a6e5a;
+
+    --accent: #8b4513;
+    --accent-foreground: #f4edd8;
+
+    --card: #ede4c9;
+    --card-foreground: #2c2416;
+
+    --border: #c9b896;
+
+    --success: #2d7a3a;
+    --warning: #a0760a;
+    --error: #a83232;
+
+    --font-mono: 'Special Elite', 'Courier Prime', 'Courier New', monospace;
+    --font-sans: 'Courier Prime', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Special Elite', 'Courier Prime', serif;
+
+    --radius: 0.5rem;
+
+    --paper-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+
+    --ink-color: #1a1209;
+    --ink-faded: #85785f;
+    --ink-error: #8b1a1a;
+    --paper-line: #d4c5a0;
+    --paper-margin: #c4483c;
+    --paper-shadow: rgba(44, 36, 22, 0.08);
+    --typewriter-ribbon: #1a1209;
+
+    /* Theme-specific flags */
+    --is-typewriter: 1;
+    --is-dark: 0;
   }
 
-  .dark {
-    /* Rich Dark Mode */
-    --background: #0f172a; /* Deep slate/navy */
-    --foreground: #f8fafc; /* Off-white */
-    
-    --primary: #facc15; /* Bright Yellow */
-    --primary-foreground: #0f172a;
-    
-    --muted: #1e293b;
-    --muted-foreground: #94a3b8;
-    
-    --accent: #334155;
-    --accent-foreground: #f8fafc;
-    
-    --card: #1e293b;
-    --card-foreground: #f8fafc;
-    
-    --border: #334155;
+  /* ══════════════════════════════════════════════════════════════════════════
+     THEME: MIDNIGHT
+     Deep blacks, neon amber/indigo accents
+     ══════════════════════════════════════════════════════════════════════════ */
+  [data-theme="midnight"] {
+    --background: #050810;
+    --background-elevated: #0a0f1e;
+    --foreground: #e8ecf4;
+
+    --primary: #fbbf24;
+    --primary-foreground: #0a0e18;
+    --primary-glow: rgba(251, 191, 36, 0.35);
+
+    --secondary: #818cf8;
+    --secondary-glow: rgba(129, 140, 248, 0.3);
+
+    --muted: #111827;
+    --muted-foreground: #8a95ad;
+
+    --accent: #6366f1;
+    --accent-foreground: #ffffff;
+
+    --card: #0c1222;
+    --card-foreground: #e8ecf4;
+
+    --border: #1c2638;
+
+    --success: #34d399;
+    --warning: #fbbf24;
+    --error: #f87171;
+
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Sora', 'Inter', sans-serif;
+
+    --radius: 0.875rem;
+
+    --is-typewriter: 0;
+    --is-dark: 1;
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════════
+     THEME: DAYLIGHT
+     Warm cream, soft shadows
+     ══════════════════════════════════════════════════════════════════════════ */
+  [data-theme="daylight"] {
+    --background: #faf8f2;
+    --background-elevated: #ffffff;
+    --foreground: #1a1a2e;
+
+    --primary: #d97706;
+    --primary-foreground: #ffffff;
+    --primary-glow: rgba(217, 119, 6, 0.2);
+
+    --secondary: #6366f1;
+    --secondary-glow: rgba(99, 102, 241, 0.15);
+
+    --muted: #f0ece2;
+    --muted-foreground: #6b7280;
+
+    --accent: #6366f1;
+    --accent-foreground: #ffffff;
+
+    --card: #ffffff;
+    --card-foreground: #1a1a2e;
+
+    --border: #e5e1d8;
+
+    --success: #059669;
+    --warning: #d97706;
+    --error: #dc2626;
+
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Sora', 'Inter', sans-serif;
+
+    --radius: 0.875rem;
+
+    --is-typewriter: 0;
+    --is-dark: 0;
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════════
+     THEME: FOREST
+     Deep green terminal / hacker vibes
+     ══════════════════════════════════════════════════════════════════════════ */
+  [data-theme="forest"] {
+    --background: #0a120a;
+    --background-elevated: #0f1a0f;
+    --foreground: #c8e6c9;
+
+    --primary: #4caf50;
+    --primary-foreground: #0a120a;
+    --primary-glow: rgba(76, 175, 80, 0.3);
+
+    --secondary: #81c784;
+    --secondary-glow: rgba(129, 199, 132, 0.2);
+
+    --muted: #142214;
+    --muted-foreground: #6b9e6e;
+
+    --accent: #2e7d32;
+    --accent-foreground: #e8f5e9;
+
+    --card: #0f1a0f;
+    --card-foreground: #c8e6c9;
+
+    --border: #1e3a1e;
+
+    --success: #66bb6a;
+    --warning: #fdd835;
+    --error: #ef5350;
+
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Sora', 'Inter', sans-serif;
+
+    --radius: 0.5rem;
+
+    --is-typewriter: 0;
+    --is-dark: 1;
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════════
+     THEME: SAKURA
+     Soft pink/lavender pastels, cherry blossom accents
+     ══════════════════════════════════════════════════════════════════════════ */
+  [data-theme="sakura"] {
+    --background: #fdf2f8;
+    --background-elevated: #ffffff;
+    --foreground: #3b1f3b;
+
+    --primary: #db2777;
+    --primary-foreground: #ffffff;
+    --primary-glow: rgba(219, 39, 119, 0.2);
+
+    --secondary: #a78bfa;
+    --secondary-glow: rgba(167, 139, 250, 0.2);
+
+    --muted: #fce7f3;
+    --muted-foreground: #9f6b8e;
+
+    --accent: #7c3aed;
+    --accent-foreground: #ffffff;
+
+    --card: #ffffff;
+    --card-foreground: #3b1f3b;
+
+    --border: #f3d1e4;
+
+    --success: #059669;
+    --warning: #d97706;
+    --error: #e11d48;
+
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-display: 'Sora', 'Inter', sans-serif;
+
+    --radius: 1rem;
+
+    --is-typewriter: 0;
+    --is-dark: 0;
   }
 }
 
-html, body {
+/* ── Theme transition ──────────────────────────────────────────────────── */
+html {
+  transition: background-color 0.4s ease, color 0.3s ease;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html,
+body {
   font-family: var(--font-sans);
   background-color: var(--background);
   color: var(--foreground);
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-pre, code, textarea {
+pre,
+code,
+textarea,
+.font-mono {
   font-family: var(--font-mono);
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--muted);
+/* ── Font size scale ───────────────────────────────────────────────────── */
+.fs-sm pre, .fs-sm code, .fs-sm textarea { font-size: 12px; line-height: 1.5; }
+.fs-md pre, .fs-md code, .fs-md textarea { font-size: 14px; line-height: 1.55; }
+.fs-lg pre, .fs-lg code, .fs-lg textarea { font-size: 16px; line-height: 1.6; }
+.fs-xl pre, .fs-xl code, .fs-xl textarea { font-size: 18px; line-height: 1.65; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   TYPEWRITER THEME — Paper & Ink Effects
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Paper texture background */
+[data-theme="typewriter"] body {
+  background-image:
+    /* Subtle paper grain noise */
+    var(--paper-grain),
+    /* Horizontal ruled lines */
+    repeating-linear-gradient(
+      transparent,
+      transparent 31px,
+      var(--paper-line) 31px,
+      var(--paper-line) 32px
+    );
+  background-attachment: local;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--muted-foreground);
-  border-radius: 4px;
+/* Red margin line on the left (classic notebook style) */
+[data-theme="typewriter"] .typing-paper-margin::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 60px;
+  width: 2px;
+  background: var(--paper-margin);
+  opacity: 0.4;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Paper panel styling */
+[data-theme="typewriter"] .paper-panel {
+  background: linear-gradient(
+    135deg,
+    #f4edd8 0%,
+    #ede4c9 40%,
+    #e8dfc0 100%
+  );
+  border: 1px solid var(--border);
+  box-shadow:
+    2px 3px 12px var(--paper-shadow),
+    inset 0 0 80px rgba(139, 69, 19, 0.03);
+  position: relative;
+}
+
+/* Coffee stain ring decoration */
+[data-theme="typewriter"] .paper-panel::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(139, 69, 19, 0.06);
+  background: radial-gradient(circle, rgba(139, 69, 19, 0.02) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Paper torn edge effect */
+[data-theme="typewriter"] .paper-torn-edge {
+  clip-path: polygon(
+    0 0, 2% 1%, 5% 0, 8% 0.5%, 12% 0, 15% 0.8%, 18% 0, 22% 0.3%,
+    25% 0, 28% 0.6%, 32% 0, 35% 0.4%, 38% 0, 42% 0.7%, 45% 0,
+    48% 0.5%, 52% 0, 55% 0.3%, 58% 0, 62% 0.8%, 65% 0, 68% 0.4%,
+    72% 0, 75% 0.6%, 78% 0, 82% 0.3%, 85% 0, 88% 0.7%, 92% 0,
+    95% 0.5%, 98% 0, 100% 0.3%,
+    100% 100%, 98% 99.5%, 95% 100%, 92% 99.3%, 88% 100%, 85% 99.6%,
+    82% 100%, 78% 99.4%, 75% 100%, 72% 99.7%, 68% 100%, 65% 99.3%,
+    62% 100%, 58% 99.5%, 55% 100%, 52% 99.8%, 48% 100%, 45% 99.4%,
+    42% 100%, 38% 99.6%, 35% 100%, 32% 99.3%, 28% 100%, 25% 99.7%,
+    22% 100%, 18% 99.5%, 15% 100%, 12% 99.3%, 8% 100%, 5% 99.6%,
+    2% 100%, 0 99.5%
+  );
+}
+
+/* Ink stamp character animation */
+@keyframes inkStamp {
+  0% {
+    opacity: 0;
+    transform: scale(1.3);
+    filter: blur(1px);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(0.95);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+[data-theme="typewriter"] .char-typed {
+  animation: inkStamp 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  color: var(--ink-color);
+  text-shadow: 0.5px 0.5px 0px rgba(26, 18, 9, 0.15);
+}
+
+[data-theme="typewriter"] .char-untyped {
+  color: var(--ink-faded);
+  opacity: 0.8;
+}
+
+[data-theme="typewriter"] .char-error {
+  color: var(--ink-error);
+  text-decoration: line-through;
+  text-decoration-color: var(--ink-error);
+  text-decoration-thickness: 2px;
+  position: relative;
+}
+
+/* Typewriter carriage cursor */
+[data-theme="typewriter"] .typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background: var(--typewriter-ribbon);
+  animation: typewriterBlink 0.8s steps(1) infinite;
+  vertical-align: text-bottom;
+  margin-left: -1px;
+}
+
+@keyframes typewriterBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Typewriter panel header — looks like a paper tab */
+[data-theme="typewriter"] .panel-header {
+  background: linear-gradient(180deg, #ddd3b8 0%, var(--card) 100%);
+  border-bottom: 2px solid var(--border);
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+/* Hole punches on left side */
+[data-theme="typewriter"] .paper-holes::before,
+[data-theme="typewriter"] .paper-holes::after {
+  content: '';
+  position: absolute;
+  left: 20px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--background);
+  z-index: 2;
+  pointer-events: none;
+}
+[data-theme="typewriter"] .paper-holes::before {
+  top: 30px;
+}
+[data-theme="typewriter"] .paper-holes::after {
+  bottom: 30px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FOREST THEME — Matrix/Terminal effects
+   ══════════════════════════════════════════════════════════════════════════ */
+[data-theme="forest"] .code-panel {
+  text-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+[data-theme="forest"] .forest-scanline::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(transparent, rgba(76, 175, 80, 0.04), transparent);
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SAKURA THEME — Cherry blossom petals
+   ══════════════════════════════════════════════════════════════════════════ */
+@keyframes petalFloat {
+  0% {
+    transform: translateY(-10px) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% {
+    transform: translateY(100vh) rotate(720deg) translateX(100px);
+    opacity: 0;
+  }
+}
+
+[data-theme="sakura"] .sakura-petal {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(ellipse at 30% 30%, #f9a8d4 0%, #fbcfe8 60%, transparent 100%);
+  border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
+  pointer-events: none;
+  z-index: 0;
+  animation: petalFloat linear infinite;
+  opacity: 0;
+}
+
+/* ── Decorative background ─────────────────────────────────────────────── */
+.app-grid {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  opacity: 0.4;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
   opacity: 0.5;
+  pointer-events: none;
 }
 
-::-webkit-scrollbar-thumb:hover {
+/* ── Glass surfaces ────────────────────────────────────────────────────── */
+.glass {
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+
+[data-theme="typewriter"] .glass {
+  background: color-mix(in srgb, var(--card) 90%, transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 2px 2px 8px var(--paper-shadow);
+}
+
+.glass-strong {
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+}
+
+[data-theme="typewriter"] .glass-strong {
+  background: var(--card);
+  backdrop-filter: none;
+  box-shadow: 3px 4px 16px var(--paper-shadow);
+}
+
+/* ── Glow ──────────────────────────────────────────────────────────────── */
+.glow-primary {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary) 30%, transparent),
+    0 8px 40px -8px var(--primary-glow);
+}
+
+[data-theme="typewriter"] .glow-primary {
+  box-shadow: 2px 3px 12px var(--paper-shadow);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary) 60%, var(--secondary) 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+[data-theme="midnight"] .text-gradient {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 60%, #818cf8 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="forest"] .text-gradient {
+  background: linear-gradient(135deg, #4caf50 0%, #81c784 60%, #a5d6a7 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="sakura"] .text-gradient {
+  background: linear-gradient(135deg, #db2777 0%, #ec4899 60%, #a78bfa 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-amber {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ── Hover lift ────────────────────────────────────────────────────────── */
+.hover-lift {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+}
+
+/* ── Buttons ───────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary));
+  color: var(--primary-foreground);
+  box-shadow: 0 4px 20px -6px var(--primary-glow);
+}
+
+[data-theme="midnight"] .btn-primary {
+  background: linear-gradient(135deg, var(--primary), #f59e0b);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px -6px var(--primary-glow);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+.btn-ghost {
+  background: color-mix(in srgb, var(--card) 60%, transparent);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+.btn-ghost:hover {
+  background: var(--muted);
+  border-color: color-mix(in srgb, var(--primary) 40%, var(--border));
+}
+
+[data-theme="typewriter"] .btn {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.8em;
+}
+
+[data-theme="typewriter"] .btn-primary {
   background: var(--primary);
+  box-shadow: 2px 3px 0px rgba(44, 36, 22, 0.2);
+  border-radius: 4px;
+}
+
+[data-theme="typewriter"] .btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 3px 4px 0px rgba(44, 36, 22, 0.25);
+}
+
+[data-theme="typewriter"] .btn-ghost {
+  background: transparent;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 1px 2px 0px rgba(44, 36, 22, 0.1);
+}
+
+/* ── Smooth caret ─────────────────────────────────────────────────────── */
+.smooth-caret {
+  transition: left 0.08s ease-out, top 0.08s ease-out;
+}
+
+/* ── Current line highlight ────────────────────────────────────────────── */
+.current-line-highlight {
+  background: color-mix(in srgb, var(--primary) 6%, transparent);
+  border-left: 2px solid color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+[data-theme="typewriter"] .current-line-highlight {
+  background: rgba(139, 69, 19, 0.04);
+  border-left: 2px solid rgba(196, 72, 60, 0.2);
+}
+
+/* ── Animations ────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes floatBlob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, -30px) scale(1.05); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes gradeReveal {
+  0% { opacity: 0; transform: scale(0.3) rotate(-20deg); }
+  60% { transform: scale(1.15) rotate(5deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+@keyframes keystroke {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+
+.animate-fade-up { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fade-in { animation: fadeIn 0.7s ease both; }
+.animate-float { animation: floatBlob 14s ease-in-out infinite; }
+.animate-slide-in-up { animation: slideInUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-count-up { animation: countUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-grade-reveal { animation: gradeReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-keystroke { animation: keystroke 0.1s ease; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* ── Skeleton shimmer ──────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--muted) 25%,
+    color-mix(in srgb, var(--muted-foreground) 18%, var(--muted)) 50%,
+    var(--muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 0.5rem;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--muted-foreground) 40%, transparent);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+[data-theme="typewriter"] ::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--border) 80%, transparent);
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* ── Keyboard heatmap ──────────────────────────────────────────────────── */
+.keyboard-key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  min-width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  transition: all 0.15s ease;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.keyboard-key:hover {
+  transform: scale(1.1);
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.keyboard-key .key-accuracy {
+  position: absolute;
+  bottom: -1px;
+  right: 2px;
+  font-size: 7px;
+  opacity: 0.8;
+}
+
+/* ── Ambient sound player ──────────────────────────────────────────────── */
+.ambient-player {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 50;
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+[data-theme="typewriter"] .ambient-player {
+  border-radius: 4px;
+  box-shadow: 2px 3px 8px var(--paper-shadow);
+}
+
+.ambient-player:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+}
+
+/* ── Theme picker cards ────────────────────────────────────────────────── */
+.theme-card {
+  cursor: pointer;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.theme-card.active {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.theme-card .theme-preview {
+  height: 48px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Paste modal ───────────────────────────────────────────────────────── */
+.paste-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.paste-modal {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 700px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideInUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme="typewriter"] .paste-modal {
+  background: var(--card);
+  border-radius: 4px;
+  box-shadow: 4px 5px 20px var(--paper-shadow);
+}
+
+/* ── Utilities ─────────────────────────────────────────────────────────── */
+.h-5\.5 { height: 1.375rem; }
+.w-10 { width: 2.5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

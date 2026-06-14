@@ -6,6 +6,7 @@ import { stackAlgorithms } from './stacks';
 import { queueAlgorithms } from './queues';
 import { treeAlgorithms } from './trees';
 import { moreSqlQueries } from './sql';
+import { companyQuestions } from './companies';
 
 export const algorithmData: AlgorithmSnippet[] = [
     ...moreArrayAlgorithms,
@@ -14,5 +15,6 @@ export const algorithmData: AlgorithmSnippet[] = [
     ...stackAlgorithms,
     ...queueAlgorithms,
     ...treeAlgorithms,
-    ...moreSqlQueries
+    ...moreSqlQueries,
+    ...companyQuestions,
 ];

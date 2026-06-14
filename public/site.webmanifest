@@ -1,0 +1,20 @@
+{
+  "name": "CodeType — Coding Typing Practice",
+  "short_name": "CodeType",
+  "description": "Master your coding speed with real DSA algorithms in Java, C++, Python, and SQL.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#070A12",
+  "theme_color": "#070A12",
+  "orientation": "any",
+  "categories": ["education", "productivity", "developer"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

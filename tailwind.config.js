@@ -1,17 +1,20 @@
 export default {
   darkMode: 'class',
-  content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}'
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
+        background: {
+          DEFAULT: 'var(--background)',
+          elevated: 'var(--background-elevated)',
+        },
         foreground: 'var(--foreground)',
         primary: {
           DEFAULT: 'var(--primary)',
           foreground: 'var(--primary-foreground)',
+        },
+        secondary: {
+          DEFAULT: 'var(--secondary)',
         },
         muted: {
           DEFAULT: 'var(--muted)',
@@ -26,7 +29,18 @@ export default {
           foreground: 'var(--card-foreground)',
         },
         border: 'var(--border)',
-      }
+        success: 'var(--success)',
+        warning: 'var(--warning)',
+        error: 'var(--error)',
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+        display: ['Sora', 'Inter', 'sans-serif'],
+      },
+      borderRadius: {
+        xl: 'var(--radius)',
+      },
     },
   },
   plugins: [],

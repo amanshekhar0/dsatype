@@ -38,7 +38,7 @@ export const TypingSection: React.FC = () => {
 
   const handleDifficultyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (typeof setSelectedDifficulty === 'function') {
-      setSelectedDifficulty(e.target.value);
+      setSelectedDifficulty(e.target.value as any);
     }
   };
 
