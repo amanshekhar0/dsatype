@@ -18,8 +18,8 @@ import {
 const features = [
   {
     icon: <CodeIcon size={20} />,
-    title: 'Multi-Language Support',
-    desc: 'Practice with Java, C++, Python, and SQL — real algorithms, not Lorem Ipsum.',
+    title: 'DSA Coding Typing Test',
+    desc: 'Take a coding typing test with Java, C++, Python, and SQL — master real DSA coding, not Lorem Ipsum.',
   },
   {
     icon: <SparklesIcon size={20} />,
@@ -77,9 +77,9 @@ export const HomePage = () => {
   const isTypewriter = settings.visualTheme === 'typewriter';
 
   useSEO({
-    title: 'CodeType — Master Coding Speed | Typing Practice for Developers',
+    title: 'DSA Typing Website | Best Coding Typing Test & Practice',
     description:
-      'Improve your coding typing speed with real DSA algorithms in Java, C++, Python, and SQL. Track WPM, accuracy, and progress with AI-generated questions, achievements, and leaderboards.',
+      'The ultimate typing website for developers. Improve your coding speed with a real DSA coding typing test in Java, C++, Python, and SQL. Practice DSA coding online.',
     canonicalPath: '/',
   });
 
@@ -114,8 +114,8 @@ export const HomePage = () => {
 
         <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-9 animate-fade-up delay-200">
           {isTypewriter
-            ? 'The typewriter-inspired coding platform. Drill real DSA algorithms on aged paper with ink effects, ambient sounds, and five stunning visual themes.'
-            : 'The typing practice platform built for developers. Drill real DSA algorithms across four languages, track every keystroke, and compete with coders worldwide.'
+            ? 'The ultimate DSA coding typing website. Drill real algorithms with our coding typing test on aged paper with ink effects, ambient sounds, and stunning visual themes.'
+            : 'The premier typing website built for developers. Take our DSA coding typing test across four languages, track every keystroke, and improve your coding speed.'
           }
         </p>
 
@@ -245,8 +245,8 @@ export const HomePage = () => {
 
       <footer className="border-t border-border/60 py-8 text-center text-sm text-muted-foreground">
         <p>
-          <span className="font-display font-semibold text-foreground">CodeType</span> — built for
-          developers who type code, not Lorem Ipsum.
+          <span className="font-display font-semibold text-foreground">CodeType</span> — the best typing website for
+          developers who want to practice DSA coding and improve coding speed.
         </p>
       </footer>
     </div>
